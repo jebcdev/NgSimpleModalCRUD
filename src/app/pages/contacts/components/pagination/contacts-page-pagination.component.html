@@ -1,0 +1,55 @@
+<div class="flex flex-col items-center gap-4 p-4">
+  <!-- Información de paginación -->
+  <div class="text-sm text-base-content/70">
+    Mostrando {{ (currentPage - 1) * perPage + 1 }} -
+    {{ Math.min(currentPage * perPage, paginationData().items) }}
+    de {{ paginationData().items }} contactos
+  </div>
+
+  <!-- Controles de paginación -->
+  <div class="join">
+    <!-- Botón anterior -->
+    <button
+      class="join-item btn btn-sm"
+      [disabled]="!paginationData().prev"
+      (click)="onPrevPage()"
+    >
+      «
+    </button>
+
+    <!-- Números de página -->
+    @for (pageNum of getPageNumbers(); track pageNum) {
+    <button
+      class="join-item btn btn-sm"
+      [class.btn-active]="pageNum === currentPage"
+      (click)="onPageChange(pageNum)"
+    >
+      {{ pageNum }}
+    </button>
+    }
+
+    <!-- Botón siguiente -->
+    <button
+      class="join-item btn btn-sm"
+      [disabled]="!paginationData().next"
+      (click)="onNextPage()"
+    >
+      »
+    </button>
+  </div>
+
+<!-- Selector de elementos por página -->
+<div class="flex items-center gap-2">
+  <span class="text-sm">Elementos por página:</span>
+  <select 
+    class="select select-sm select-bordered"
+    [value]="perPage"
+    (change)="onPerPageChangeEvent($event)"
+  >
+    <option value="10">10</option>
+    <option value="25">25</option>
+    <option value="50">50</option>
+    <option value="100">100</option>
+  </select>
+</div>
+</div>

@@ -1,0 +1,40 @@
+<div class="rounded-2xl shadow-2xl p-1 bg-base-300">
+  <div class="overflow-x-auto">
+    <table class="table table-zebra">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th></th>
+          <th>Nombre</th>
+          <th>Correo</th>
+          <th>Teléfono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (contact of contacts(); track $index) {
+        <tr>
+          <th>{{ $index + 1 }}</th>
+          <td>{{ contact.name }}</td>
+          <td>{{ contact.email }}</td>
+          <td>{{ contact.phone }}</td>
+          <td>
+            <div>
+              <button
+                class="btn btn-sm btn-success mr-1"
+                (click)="onEdit(contact)"
+              >
+                Editar
+              </button>
+              <button class="btn btn-sm btn-error"
+              
+              (click)="onDelete(contact.id)">Eliminar</button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+<contacts-page-edit-form [currentContact]="currentContact()" />

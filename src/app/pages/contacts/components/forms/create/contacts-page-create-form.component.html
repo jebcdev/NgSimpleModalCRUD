@@ -1,0 +1,106 @@
+<dialog id="contacts-create-form-modal" class="modal">
+  <div class="modal-box">
+    <div class="m-2">
+      <small>Presiona Esc Para Salir</small>
+    </div>
+    <!-- Botón X en la esquina superior derecha -->
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+
+    <div class="divider">Contacto</div>
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+      <!-- Campo ID (oculto) -->
+      <input type="hidden" formControlName="id" />
+
+      <!-- Campo Nombre -->
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Nombre *</span>
+        </label>
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Ingresa el nombre"
+          class="input input-bordered w-full"
+          [class.input-error]="
+            form.get('name')?.invalid &&
+            (form.get('name')?.dirty || form.get('name')?.touched)
+          "
+        />
+        @if (getFieldError('name')) {
+        <label class="label">
+          <span class="label-text-alt text-error">{{
+            getFieldError("name")
+          }}</span>
+        </label>
+        }
+      </div>
+
+      <!-- Campo Email -->
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Email *</span>
+        </label>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="ejemplo@correo.com"
+          class="input input-bordered w-full"
+          [class.input-error]="
+            form.get('email')?.invalid &&
+            (form.get('email')?.dirty || form.get('email')?.touched)
+          "
+        />
+        @if (getFieldError('email')) {
+        <label class="label">
+          <span class="label-text-alt text-error">{{
+            getFieldError("email")
+          }}</span>
+        </label>
+        }
+      </div>
+
+      <!-- Campo Teléfono -->
+      <div class="form-control w-full">
+        <label class="label">
+          <span class="label-text">Teléfono *</span>
+        </label>
+        <input
+          type="tel"
+          formControlName="phone"
+          placeholder="1234567890"
+          class="input input-bordered w-full"
+          [class.input-error]="
+            form.get('phone')?.invalid &&
+            (form.get('phone')?.dirty || form.get('phone')?.touched)
+          "
+        />
+        @if (getFieldError('phone')) {
+        <label class="label">
+          <span class="label-text-alt text-error">{{
+            getFieldError("phone")
+          }}</span>
+        </label>
+        }
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="modal-action">
+        <button
+          type="button"
+          class="btn"
+          onclick="document.getElementById('contacts-create-form-modal').close()"
+        >
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+
+</dialog>
